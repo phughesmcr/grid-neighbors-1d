@@ -21,7 +21,7 @@ grid-neighbors returns an array of indexes where:
 * neighbors[4] = east neighbor
 * neighbors[5] = south west neighbor
 * neighbors[6] = south neighbor
-* neighbors[0] = south east neighbor
+* neighbors[7] = south east neighbor
 
 ## License
 (C) 2019 [P. Hughes](https://www.phugh.es). All rights reserved.
