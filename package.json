@@ -1,0 +1,31 @@
+{
+  "name": "grid-neighbors-1d",
+  "version": "0.1.0",
+  "description": "Get the 8 closest neighbours of a cell in a 2d grid when flattened to a 1d array",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phugh/grid-neighbors.git"
+  },
+  "keywords": [
+    "array",
+    "2d",
+    "1d",
+    "matrix",
+    "grid",
+    "neighbours",
+    "neighbors",
+    "compass",
+    "direction",
+    "game-of-life"
+  ],
+  "author": "P. Hughes <peter@phugh.es> (https://www.phugh.es)",
+  "license": "CC-BY-NC-SA-3.0",
+  "bugs": {
+    "url": "https://github.com/phugh/grid-neighbors/issues"
+  },
+  "homepage": "https://github.com/phugh/grid-neighbors#readme"
+}
