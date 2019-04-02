@@ -1,6 +1,6 @@
 {
   "name": "grid-neighbors-1d",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Get the 8 closest neighbours of a cell in a 2d grid when flattened to a 1d array",
   "main": "index.js",
   "scripts": {
