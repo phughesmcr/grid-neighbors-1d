@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/phugh/grid-neighbors.git"
+    "url": "git+https://github.com/phugh/grid-neighbors-1d.git"
   },
   "keywords": [
     "array",
@@ -25,7 +25,7 @@
   "author": "P. Hughes <peter@phugh.es> (https://www.phugh.es)",
   "license": "CC-BY-NC-SA-3.0",
   "bugs": {
-    "url": "https://github.com/phugh/grid-neighbors/issues"
+    "url": "https://github.com/phugh/grid-neighbors-1d/issues"
   },
-  "homepage": "https://github.com/phugh/grid-neighbors#readme"
+  "homepage": "https://github.com/phugh/grid-neighbors-1d#readme"
 }
