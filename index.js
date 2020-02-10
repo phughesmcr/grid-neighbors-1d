@@ -7,7 +7,7 @@
  * Help me make this better:
  * https://github.com/phugh/grid-neighbors-1d
  *
- * (C) 2019 P. Hughes
+ * (C) 2019-20 P. Hughes
  * Licence : Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported
  * http://creativecommons.org/licenses/by-nc-sa/3.0/
  *
@@ -36,16 +36,16 @@
    * @return {Array} [north_west, north, north_east, west, east, south_west, south, south_east];
    */
   const getNeighbours = (cell, width, height) => {
-    if (!cell || !width || !height) return new Error('grid-neighbors: Incorrect input!');
+    if (cell == null || width == null || height == null) throw new Error('grid-neighbors: Incorrect input!');
 
-    cell = parseInt(cell);
-    width = parseInt(width);
-    height = parseInt(height);
+    cell = parseInt(cell, 10);
+    width = parseInt(width, 10);
+    height = parseInt(height, 10);
 
     const SIZE = width * height; // Total cells
 
-    if (SIZE < 9) return new Error(`grid-neighbors: Minimum grid size is 9 cells. Provided grid is ${SIZE} cells.`);
-    if (cell >= SIZE) return new Error(`grid-neighbors: Cell reference "${cell}" out of bounds. Maximum reference is ${SIZE - 1}.`);
+    if (SIZE < 9) throw new Error(`grid-neighbors: Minimum grid size is 9 cells. Provided grid is ${SIZE} cells.`);
+    if (cell >= SIZE) throw new Error(`grid-neighbors: Cell reference "${cell}" out of bounds. Maximum reference is ${SIZE - 1}.`);
 
     // Setup
     const LC = Math.floor(cell / width) * width;  // left most cell
