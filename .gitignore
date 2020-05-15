@@ -1,6 +1,10 @@
 ### Project Specific Ignores
-node_modules/
 .vscode/
+node_modules/
+test/*
+!test/test.js
+.npm
+.env
 
 ### Ignore OS X Files
 *.DS_Store
@@ -33,6 +37,3 @@ Temporary Items
 logs
 *.log
 npm-debug.log*
-
-.npm
-.env
