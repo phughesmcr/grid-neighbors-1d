@@ -1,8 +1,8 @@
 /**
  * grid-neighbors-1d
- * v0.1.0
+ * v1.0.0
  *
- * Get the 8 closest neighbours of a cell in a 2d grid when flattened to a 1d array
+ * Get the 8 closest neighbors of a cell in a 2d grid when flattened to a 1d array
  *
  * Help me make this better:
  * https://github.com/phugh/grid-neighbors-1d
@@ -14,39 +14,42 @@
  * Usage example:
  * const gn = require("grid-neighbors-1d");
  * const neighbors = gn(12,5,6); // i.e. get the neighbors of cell 12 in a grid 5 high by 6 wide
- * console.log(neighbors); // [6, 7, 8, 11, 13, 16, 17, 18]
- * // i.e. [north_west, north, north_east, west, east, south_west, south, south_east]
+ * console.log(neighbors); // [7, 8, 13, 18, 17, 16, 11, 6] - clockwise from north
+ * // i.e. [north, north east, east, south east, south, south west, west, north west]
  *
  * See README.md for help.
  *
- * @param  {Number} cell   current cell
- * @param  {Number} width  grid width
- * @param  {Number} height grid height
- * @return {Array} [north_west, north, north_east, west, east, south_west, south, south_east];
+ * @param {number} cell current cell
+ * @param {number} width grid width
+ * @param {number} height grid height
+ * @return {Array<number>} [north, north east, east, south east, south, south west, west, north west];
  */
 
-(function() {
+// eslint-disable-next-line no-extra-semi
+;(() => {
   'use strict';
 
   /**
-   * @function getNeighbours
-   * @param  {Number} cell   current cell
-   * @param  {Number} width  grid width
-   * @param  {Number} height grid height
-   * @return {Array} [north_west, north, north_east, west, east, south_west, south, south_east];
+   * @function getNeighbors
+   * @param {number} cell current cell
+   * @param {number} width grid width
+   * @param {number} height grid height
+   * @return {Array<number>} [north, north east, east, south east, south, south west, west, north west];
    */
-  const getNeighbours = (cell, width, height) => {
-    if (cell == null || width == null || height == null) throw new Error('grid-neighbors: Incorrect input!');
-
-    cell = parseInt(cell, 10);
-    width = parseInt(width, 10);
-    height = parseInt(height, 10);
+  const getNeighbors = (cell, width, height) => {
+    if (cell == null || width == null || height == null) {
+      throw new Error('Invald input, expected cell, width and height.');
+    } else if (isNaN(cell) || isNaN(width) || isNaN(height)) {
+      throw new TypeError('Invald input, expected numbers only.');
+    }
 
     const SIZE = width * height; // Total cells
 
-    if (SIZE < 9) throw new Error(`grid-neighbors: Minimum grid size is 9 cells. Provided grid is ${SIZE} cells.`);
-    if (cell >= SIZE) throw new Error(`grid-neighbors: Cell reference "${cell}" out of bounds. Maximum reference is ${SIZE - 1}.`);
-
+    if (SIZE < 9) {
+      throw new Error(`grid-neighbors: Minimum grid size is 9 cells. Provided grid is ${SIZE} cells.`);
+    } else if (cell >= SIZE) {
+      throw new Error(`grid-neighbors: Cell reference "${cell}" out of bounds. Maximum reference is ${SIZE - 1}.`);
+    }
     // Setup
     const LC = Math.floor(cell / width) * width;  // left most cell
     const RC = (LC + width) - 1;                  // right most cell
@@ -119,15 +122,14 @@
       southWest = south - 1;
     }
 
-    return [northWest, north, northEast, west, east, southWest, south, southEast];
+    return [north, northEast, east, southEast, south, southWest, west, northWest];
   };
 
   if (typeof exports !== 'undefined') {
     if (typeof module !== 'undefined' && module.exports) {
-      exports = module.exports = getNeighbours;
+      exports = module.exports = getNeighbors;
     }
-    exports.getNeighbours = getNeighbours;
-  } else {
-    global.getNeighbours = getNeighbours;
+    exports.getNeighbors = getNeighbors;
+    exports.getNeighbours = getNeighbors;
   }
 })();

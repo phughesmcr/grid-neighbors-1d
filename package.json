@@ -1,7 +1,7 @@
 {
   "name": "grid-neighbors-1d",
   "version": "0.1.2",
-  "description": "Get the 8 closest neighbours of a cell in a 2d grid when flattened to a 1d array",
+  "description": "Get the 8 closest neighbors of a cell in a 2d grid when flattened to a 1d array",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -13,6 +13,8 @@
     "1d",
     "matrix",
     "grid",
+    "neighbour",
+    "neighbor",
     "neighbours",
     "neighbors",
     "compass",
