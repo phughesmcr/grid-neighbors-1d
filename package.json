@@ -3,9 +3,6 @@
   "version": "0.1.2",
   "description": "Get the 8 closest neighbours of a cell in a 2d grid when flattened to a 1d array",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/phugh/grid-neighbors-1d.git"
@@ -22,10 +19,18 @@
     "direction",
     "game-of-life"
   ],
-  "author": "P. Hughes <peter@phugh.es> (https://www.phugh.es)",
+  "author": {
+    "name": "Peter Hughes",
+    "email": "peter@phugh.es",
+    "url": "https://www.phugh.es"
+  },
   "license": "CC-BY-NC-SA-3.0",
   "bugs": {
     "url": "https://github.com/phugh/grid-neighbors-1d/issues"
   },
-  "homepage": "https://github.com/phugh/grid-neighbors-1d#readme"
+  "homepage": "https://github.com/phugh/grid-neighbors-1d#readme",
+  "devDependencies": {
+    "eslint": "^7.0.0",
+    "eslint-config-google": "^0.14.0"
+  }
 }
