@@ -30,8 +30,6 @@ This means you can use destructuring if your environment supports it:
 const [north, northEast, east, southEast, south, southWest, west, northWest] = getNeighbors(4, 10, 6);
 ```
 
-For your convenience, TypeScript type declarations (index.d.ts), a declaration map (index.d.ts.map), and a sourcemap (index.js.map) are included.
-
 A `Direction` object is also available for convenience:
 
 ```javascript
@@ -48,6 +46,8 @@ const getNeighbors = generateNeighborLookup(5, 5);
 const neighbors = getNeighbors(12);
 console.log(neighbors); // [7, 8, 13, 18, 17, 16, 11, 6]
 ```
+
+For your convenience, TypeScript type declarations (index.d.ts), a declaration map (index.d.ts.map), and a sourcemap (index.js.map) are included.
 
 ## License
 &copy; 2019-23 [P. Hughes](https://www.phugh.es). All rights reserved.
