@@ -8,8 +8,6 @@
  * https://github.com/phugh/grid-neighbors-1d
  *
  * @module grid-neighbors-1d
- * @exports getNeighbors
- * @exports getNeighbours
  * @copyright 2019-23 P. Hughes. All rights reserved.
  * @license MIT
  */
