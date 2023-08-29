@@ -25,6 +25,8 @@ grid-neighbors returns an 0-based array of indexes of the cell immediately to th
 * neighbors[7] = north west neighbor
 
 ## License
-&copy; 2019-20 [P. Hughes](https://www.phugh.es). All rights reserved.
+&copy; 2019-23 [P. Hughes](https://www.phugh.es). All rights reserved.
+
+Shared under the [MIT](https://choosealicense.com/licenses/mit/) license.
 
 Shared under the [Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-nc-sa/3.0/) license.

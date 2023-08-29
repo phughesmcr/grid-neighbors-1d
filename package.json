@@ -26,7 +26,7 @@
     "email": "peter@phugh.es",
     "url": "https://www.phugh.es"
   },
-  "license": "CC-BY-NC-SA-3.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/phugh/grid-neighbors-1d/issues"
   },
