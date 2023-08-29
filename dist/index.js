@@ -1,6 +1,6 @@
 /**
  * grid-neighbors-1d
- * v2.0.0
+ * v2.1.0
  *
  * Get the 8 closest neighbors of a cell in a 2d grid when flattened to a 1d array
  *
@@ -8,11 +8,19 @@
  * https://github.com/phugh/grid-neighbors-1d
  *
  * @module grid-neighbors-1d
- * @exports getNeighbors
- * @export getNeighbours
  * @copyright 2019-23 P. Hughes. All rights reserved.
  * @license MIT
  */
+export const Direction = {
+    NORTH: 0,
+    NORTH_EAST: 1,
+    EAST: 2,
+    SOUTH_EAST: 3,
+    SOUTH: 4,
+    SOUTH_WEST: 5,
+    WEST: 6,
+    NORTH_WEST: 7,
+};
 /**
  * @function getNeighbors
  * @description Get the 8 closest neighbors of a cell in a 2d grid when flattened to a 1d array
@@ -30,34 +38,36 @@
  */
 export const getNeighbors = (cell, width, height) => {
     // Validate input
-    if (cell == null || isNaN(cell)) {
-        throw new SyntaxError("Expected cell to be a number.");
+    if (cell == null || isNaN(cell) || cell < 0) {
+        throw new SyntaxError("Expected cell to be a non-negative number.");
     }
-    if (width == null || isNaN(width)) {
-        throw new SyntaxError("Expected width to be a number.");
+    if (width == null || isNaN(width) || width < 0) {
+        throw new SyntaxError("Expected width to be a non-negative number.");
     }
-    if (height == null || isNaN(height)) {
-        throw new SyntaxError("Expected height to be a number.");
+    if (height == null || isNaN(height) || height < 0) {
+        throw new SyntaxError("Expected height to be a non-negative number.");
     }
-    /** The total number of cells in the grid */
-    const SIZE = width * height;
+    const CELL = Math.floor(cell);
+    const WIDTH = Math.floor(width);
+    const HEIGHT = Math.floor(height);
+    const SIZE = WIDTH * HEIGHT;
     if (SIZE < 9) {
-        throw new RangeError(`Minimum grid size is 9 cells. Provided grid (${width} X ${height}) is ${SIZE} cells.`);
+        throw new RangeError(`Minimum grid size is 9 cells. Provided grid (${WIDTH} X ${HEIGHT}) is ${SIZE} cells.`);
     }
-    else if (cell >= SIZE) {
-        throw new RangeError(`Cell reference "${cell}" out of bounds. Maximum is ${SIZE - 1}.`);
+    else if (CELL >= SIZE) {
+        throw new RangeError(`Cell reference "${CELL}" out of bounds. Maximum is ${SIZE - 1}.`);
     }
-    // Setup
-    const LEFT_MOST_CELL = Math.floor(cell / width) * width; // left most cell
-    const RIGHT_MOST_CELL = LEFT_MOST_CELL + width - 1; // right most cell
-    const SIZE_MINUS_WIDTH = SIZE - width;
-    const CELL_MINUS_WIDTH = cell - width;
-    const CELL_PLUS_WIDTH = cell + width;
-    const CELL_MOD_WIDTH = cell % width;
-    const TOP_RIGHT = width - 1;
-    const BOTTOM_RIGHT = SIZE - 1;
-    const north = CELL_MINUS_WIDTH < 0 ? SIZE_MINUS_WIDTH + cell : CELL_MINUS_WIDTH;
-    const south = CELL_PLUS_WIDTH >= SIZE ? cell - LEFT_MOST_CELL : CELL_PLUS_WIDTH;
+    const ROW = Math.floor(CELL / WIDTH);
+    const COLUMN = CELL % WIDTH;
+    const LEFT_MOST_CELL = ROW * WIDTH;
+    const RIGHT_MOST_CELL = LEFT_MOST_CELL + WIDTH - 1;
+    const SIZE_MINUS_WIDTH = SIZE - WIDTH;
+    const CELL_MINUS_WIDTH = CELL - WIDTH;
+    const CELL_PLUS_WIDTH = CELL + WIDTH;
+    const TOP_RIGHT_CELL_IDX = WIDTH - 1;
+    const BOTTOM_RIGHT_CELL_IDX = SIZE - 1;
+    const north = CELL_MINUS_WIDTH < 0 ? SIZE_MINUS_WIDTH + CELL : CELL_MINUS_WIDTH;
+    const south = CELL_PLUS_WIDTH >= SIZE ? CELL - LEFT_MOST_CELL : CELL_PLUS_WIDTH;
     let northEast;
     let east;
     let southEast;
@@ -65,54 +75,76 @@ export const getNeighbors = (cell, width, height) => {
     let west;
     let northWest;
     // East, North-East, South-East
-    if (CELL_MOD_WIDTH === TOP_RIGHT) {
+    if (COLUMN === TOP_RIGHT_CELL_IDX) {
         // RIGHT EDGE
         east = LEFT_MOST_CELL;
-        if (cell === TOP_RIGHT) {
+        if (CELL === TOP_RIGHT_CELL_IDX) {
             // top right corner
             northEast = SIZE_MINUS_WIDTH;
-            southEast = LEFT_MOST_CELL + width;
+            southEast = LEFT_MOST_CELL + WIDTH;
         }
-        else if (cell === BOTTOM_RIGHT) {
+        else if (CELL === BOTTOM_RIGHT_CELL_IDX) {
             // bottom right corner
-            northEast = LEFT_MOST_CELL - width;
+            northEast = LEFT_MOST_CELL - WIDTH;
             southEast = 0;
         }
         else {
-            northEast = LEFT_MOST_CELL - width;
-            southEast = LEFT_MOST_CELL + width;
+            northEast = LEFT_MOST_CELL - WIDTH;
+            southEast = LEFT_MOST_CELL + WIDTH;
         }
     }
     else {
-        east = cell + 1;
+        east = CELL + 1;
         northEast = north + 1;
         southEast = south + 1;
     }
     // West, North-West, South-West
-    if (CELL_MOD_WIDTH === 0) {
+    if (COLUMN === 0) {
         // LEFT EDGE
         west = RIGHT_MOST_CELL;
-        if (cell === SIZE_MINUS_WIDTH) {
+        if (CELL === SIZE_MINUS_WIDTH) {
             // bottom left corner
-            northWest = cell - 1;
-            southWest = TOP_RIGHT;
+            northWest = CELL - 1;
+            southWest = TOP_RIGHT_CELL_IDX;
         }
-        else if (cell === 0) {
+        else if (CELL === 0) {
             // top left corner
-            northWest = BOTTOM_RIGHT;
-            southWest = RIGHT_MOST_CELL + width;
+            northWest = BOTTOM_RIGHT_CELL_IDX;
+            southWest = RIGHT_MOST_CELL + WIDTH;
         }
         else {
-            northWest = cell - 1;
-            southWest = RIGHT_MOST_CELL + width;
+            northWest = CELL - 1;
+            southWest = RIGHT_MOST_CELL + WIDTH;
         }
     }
     else {
-        west = cell - 1;
+        west = CELL - 1;
         northWest = north - 1;
         southWest = south - 1;
     }
     return [north, northEast, east, southEast, south, southWest, west, northWest];
 };
 export const getNeighbours = getNeighbors;
+/**
+ * Pre-generate a lookup table for all cells in a grid
+ * @param width grid width
+ * @param height grid height
+ * @returns a function that takes a cell reference and returns an array of cell references [north, north-east,....]
+ * @throws {SyntaxError} if function arguments are undefined or not numbers
+ * @throws {RangeError} if total grid size is less than 9 cells
+ * @example
+ * import { generateNeighborLookup } from 'grid-neighbors-1d';
+ * const getNeighbors = generateNeighborLookup(5,6);
+ * const neighbors = getNeighbors(12); // i.e. get the neighbors of cell 12 in a grid 5 high by 6 wide
+ * console.log(neighbors); // [7, 8, 13, 18, 17, 16, 11, 6] - clockwise from north
+ */
+export const generateNeighborLookup = (width, height) => {
+    const neighborLookup = {};
+    const size = width * height;
+    for (let cell = 0; cell < size; cell++) {
+        neighborLookup[cell] = getNeighbors(cell, width, height);
+    }
+    return (cell) => neighborLookup[cell];
+};
+export const generateNeighbourLookup = generateNeighborLookup;
 //# sourceMappingURL=index.js.map

@@ -1,6 +1,6 @@
 /**
  * grid-neighbors-1d
- * v2.0.0
+ * v2.1.0
  *
  * Get the 8 closest neighbors of a cell in a 2d grid when flattened to a 1d array
  *
