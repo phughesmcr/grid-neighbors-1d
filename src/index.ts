@@ -9,7 +9,7 @@
  *
  * @module grid-neighbors-1d
  * @exports getNeighbors
- * @export getNeighbours
+ * @exports getNeighbours
  * @copyright 2019-23 P. Hughes. All rights reserved.
  * @license MIT
  */
