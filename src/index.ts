@@ -14,6 +14,17 @@
  * @license MIT
  */
 
+export const Direction = {
+  NORTH: 0,
+  NORTH_EAST: 1,
+  EAST: 2,
+  SOUTH_EAST: 3,
+  SOUTH: 4,
+  SOUTH_WEST: 5,
+  WEST: 6,
+  NORTH_WEST: 7,
+} as const;
+
 /**
  * @function getNeighbors
  * @description Get the 8 closest neighbors of a cell in a 2d grid when flattened to a 1d array

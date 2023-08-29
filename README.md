@@ -30,7 +30,13 @@ This means you can use destructuring if your environment supports it:
 const [north, northEast, east, southEast, south, southWest, west, northWest] = getNeighbors(4, 10, 6);
 ```
 
-For your convenience, TypeScript type declarations (index.d.mts), a declaration map , and a sourcemap are included.
+A `Direction` object is also available for convenience:
+
+```javascript
+import { Direction } from "grid-neighbors-1d";
+const neighbors = getNeighbors(12, 5, 5);
+console.log(neighbors[Direction.NORTH]); // 7
+```
 
 ## License
 &copy; 2019-23 [P. Hughes](https://www.phugh.es). All rights reserved.
