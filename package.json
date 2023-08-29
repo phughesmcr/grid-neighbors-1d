@@ -15,6 +15,8 @@
     "type": "git",
     "url": "git+https://github.com/phugh/grid-neighbors-1d.git"
   },
+  "sideEffects": false,
+  "scripts": {
   "keywords": [
     "array",
     "2d",
@@ -27,7 +29,10 @@
     "neighbors",
     "compass",
     "direction",
-    "game-of-life"
+    "game-of-life",
+    "automata",
+    "cellular-automata",
+    "cellular"
   ],
   "author": {
     "name": "Peter Hughes",

@@ -1,39 +1,28 @@
-### Project Specific Ignores
-.vscode/
-node_modules/
-test/*
-!test/test.js
-.npm
-.env
-
-### Ignore OS X Files
-*.DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must end with two \r
-Icon
-
-# Thumbnails
-._*
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-# Logs
-logs
-*.log
-npm-debug.log*
+/*
+!src/
+!test/
+!.github/
+!.vscode/
+!.editorconfig
+!.eslintignore
+!.eslintrc
+!.gitattributes
+!.gitignore
+!.npmignore
+!.npmrc
+!.prettierignore
+!.prettierrc
+!AUTHORS.md
+!CHANGELOG.md
+!CODE_OF_CONDUCT.md
+!CONTRIBUTING.md
+!CONTRIBUTORS.md
+!grid-neighbors.png
+!LICENSE
+!package-lock.json
+!package.json
+!pull_request_template.md
+!README.md
+!SECURITY.md
+!SUPPORT.md
+!tsconfig.json
