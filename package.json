@@ -17,7 +17,8 @@
   },
   "sideEffects": false,
   "scripts": {
-    "prestart": "rimraf dist && eslint --fix && tsc"
+    "prestart": "rimraf dist && eslint --fix && npm run build",
+    "build": "tsc"
   },
   "pre-commit": [ "prestart" ],
   "keywords": [
