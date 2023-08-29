@@ -145,3 +145,27 @@ export const getNeighbors = (cell: number, width: number, height: number): Neigh
 };
 
 export const getNeighbours = getNeighbors;
+
+/**
+ * Pre-generate a lookup table for all cells in a grid
+ * @param width grid width
+ * @param height grid height
+ * @returns a function that takes a cell reference and returns an array of cell references [north, north-east,....]
+ * @throws {SyntaxError} if function arguments are undefined or not numbers
+ * @throws {RangeError} if total grid size is less than 9 cells
+ * @example
+ * import { generateNeighborLookup } from 'grid-neighbors-1d';
+ * const getNeighbors = generateNeighborLookup(5,6);
+ * const neighbors = getNeighbors(12); // i.e. get the neighbors of cell 12 in a grid 5 high by 6 wide
+ * console.log(neighbors); // [7, 8, 13, 18, 17, 16, 11, 6] - clockwise from north
+ */
+export const generateNeighborLookup = (width: number, height: number): ((cell: number) => Neighbors | undefined) => {
+  const neighborLookup: { [key: number]: Neighbors } = {};
+  const size = width * height;
+  for (let cell = 0; cell < size; cell++) {
+    neighborLookup[cell] = getNeighbors(cell, width, height);
+  }
+  return (cell: number) => neighborLookup[cell];
+};
+
+export const generateNeighbourLookup = generateNeighborLookup;

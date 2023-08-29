@@ -40,6 +40,15 @@ const neighbors = getNeighbors(12, 5, 5);
 console.log(neighbors[Direction.NORTH]); // 7
 ```
 
+If memory usage is not a concern and you are likely to call `getNeighbors` many times, you may want to precalculate the neighbors for a given grid size:
+
+```javascript
+import { generateNeighborLookup } from "grid-neighbors-1d";
+const getNeighbors = generateNeighborLookup(5, 5);
+const neighbors = getNeighbors(12);
+console.log(neighbors); // [7, 8, 13, 18, 17, 16, 11, 6]
+```
+
 ## License
 &copy; 2019-23 [P. Hughes](https://www.phugh.es). All rights reserved.
 
