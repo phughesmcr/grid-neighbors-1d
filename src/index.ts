@@ -14,6 +14,17 @@
  * @license MIT
  */
 
+export type Neighbors = [
+  north: number,
+  northEast: number,
+  east: number,
+  southEast: number,
+  south: number,
+  southWest: number,
+  west: number,
+  northWest: number,
+];
+
 export const Direction = {
   NORTH: 0,
   NORTH_EAST: 1,
@@ -40,20 +51,7 @@ export const Direction = {
  *  console.log(neighbors); // [7, 8, 13, 18, 17, 16, 11, 6] - clockwise from north
  *  // i.e. [north, north-east, east, south-east, south, south-west, west, north-west]
  */
-export const getNeighbors = (
-  cell: number,
-  width: number,
-  height: number,
-): [
-  north: number,
-  northEast: number,
-  east: number,
-  southEast: number,
-  south: number,
-  southWest: number,
-  west: number,
-  northWest: number,
-] => {
+export const getNeighbors = (cell: number, width: number, height: number): Neighbors => {
   // Validate input
   if (cell == null || isNaN(cell) || cell < 0) {
     throw new SyntaxError("Expected cell to be a non-negative number.");
