@@ -17,6 +17,9 @@
   },
   "sideEffects": false,
   "scripts": {
+    "prestart": "rimraf dist && eslint --fix && tsc"
+  },
+  "pre-commit": [ "prestart" ],
   "keywords": [
     "array",
     "2d",
@@ -48,6 +51,8 @@
     "@typescript-eslint/eslint-plugin": "^6.5.0",
     "@typescript-eslint/parser": "^6.5.0",
     "eslint": "^8.48.0",
+    "rimraf": "^5.0.1",
+    "pre-commit": "^1.2.2",
     "prettier": "^3.0.2",
     "typescript": "^5.2.2"
   }
