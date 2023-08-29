@@ -54,27 +54,32 @@ export const getNeighbors = (
     throw new SyntaxError("Expected height to be a number.");
   }
 
-  /** The total number of cells in the grid */
-  const SIZE = width * height;
+  const CELL = Math.floor(cell);
+  const WIDTH = Math.floor(width);
+  const HEIGHT = Math.floor(height);
 
+  const SIZE = WIDTH * HEIGHT;
   if (SIZE < 9) {
-    throw new RangeError(`Minimum grid size is 9 cells. Provided grid (${width} X ${height}) is ${SIZE} cells.`);
-  } else if (cell >= SIZE) {
-    throw new RangeError(`Cell reference "${cell}" out of bounds. Maximum is ${SIZE - 1}.`);
+    throw new RangeError(`Minimum grid size is 9 cells. Provided grid (${WIDTH} X ${HEIGHT}) is ${SIZE} cells.`);
+  } else if (CELL >= SIZE) {
+    throw new RangeError(`Cell reference "${CELL}" out of bounds. Maximum is ${SIZE - 1}.`);
   }
 
-  // Setup
-  const LEFT_MOST_CELL = Math.floor(cell / width) * width; // left most cell
-  const RIGHT_MOST_CELL = LEFT_MOST_CELL + width - 1; // right most cell
-  const SIZE_MINUS_WIDTH = SIZE - width;
-  const CELL_MINUS_WIDTH = cell - width;
-  const CELL_PLUS_WIDTH = cell + width;
-  const CELL_MOD_WIDTH = cell % width;
-  const TOP_RIGHT = width - 1;
-  const BOTTOM_RIGHT = SIZE - 1;
+  const ROW = Math.floor(CELL / WIDTH);
+  const COLUMN = CELL % WIDTH;
 
-  const north = CELL_MINUS_WIDTH < 0 ? SIZE_MINUS_WIDTH + cell : CELL_MINUS_WIDTH;
-  const south = CELL_PLUS_WIDTH >= SIZE ? cell - LEFT_MOST_CELL : CELL_PLUS_WIDTH;
+  const LEFT_MOST_CELL = ROW * WIDTH;
+  const RIGHT_MOST_CELL = LEFT_MOST_CELL + WIDTH - 1;
+
+  const SIZE_MINUS_WIDTH = SIZE - WIDTH;
+  const CELL_MINUS_WIDTH = CELL - WIDTH;
+  const CELL_PLUS_WIDTH = CELL + WIDTH;
+
+  const TOP_RIGHT_CELL_IDX = WIDTH - 1;
+  const BOTTOM_RIGHT_CELL_IDX = SIZE - 1;
+
+  const north = CELL_MINUS_WIDTH < 0 ? SIZE_MINUS_WIDTH + CELL : CELL_MINUS_WIDTH;
+  const south = CELL_PLUS_WIDTH >= SIZE ? CELL - LEFT_MOST_CELL : CELL_PLUS_WIDTH;
 
   let northEast: number;
   let east: number;
@@ -84,45 +89,45 @@ export const getNeighbors = (
   let northWest: number;
 
   // East, North-East, South-East
-  if (CELL_MOD_WIDTH === TOP_RIGHT) {
+  if (COLUMN === TOP_RIGHT_CELL_IDX) {
     // RIGHT EDGE
     east = LEFT_MOST_CELL;
-    if (cell === TOP_RIGHT) {
+    if (CELL === TOP_RIGHT_CELL_IDX) {
       // top right corner
       northEast = SIZE_MINUS_WIDTH;
-      southEast = LEFT_MOST_CELL + width;
-    } else if (cell === BOTTOM_RIGHT) {
+      southEast = LEFT_MOST_CELL + WIDTH;
+    } else if (CELL === BOTTOM_RIGHT_CELL_IDX) {
       // bottom right corner
-      northEast = LEFT_MOST_CELL - width;
+      northEast = LEFT_MOST_CELL - WIDTH;
       southEast = 0;
     } else {
-      northEast = LEFT_MOST_CELL - width;
-      southEast = LEFT_MOST_CELL + width;
+      northEast = LEFT_MOST_CELL - WIDTH;
+      southEast = LEFT_MOST_CELL + WIDTH;
     }
   } else {
-    east = cell + 1;
+    east = CELL + 1;
     northEast = north + 1;
     southEast = south + 1;
   }
 
   // West, North-West, South-West
-  if (CELL_MOD_WIDTH === 0) {
+  if (COLUMN === 0) {
     // LEFT EDGE
     west = RIGHT_MOST_CELL;
-    if (cell === SIZE_MINUS_WIDTH) {
+    if (CELL === SIZE_MINUS_WIDTH) {
       // bottom left corner
-      northWest = cell - 1;
-      southWest = TOP_RIGHT;
-    } else if (cell === 0) {
+      northWest = CELL - 1;
+      southWest = TOP_RIGHT_CELL_IDX;
+    } else if (CELL === 0) {
       // top left corner
-      northWest = BOTTOM_RIGHT;
-      southWest = RIGHT_MOST_CELL + width;
+      northWest = BOTTOM_RIGHT_CELL_IDX;
+      southWest = RIGHT_MOST_CELL + WIDTH;
     } else {
-      northWest = cell - 1;
-      southWest = RIGHT_MOST_CELL + width;
+      northWest = CELL - 1;
+      southWest = RIGHT_MOST_CELL + WIDTH;
     }
   } else {
-    west = cell - 1;
+    west = CELL - 1;
     northWest = north - 1;
     southWest = south - 1;
   }
