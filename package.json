@@ -2,7 +2,15 @@
   "name": "grid-neighbors-1d",
   "version": "1.0.0",
   "description": "Get the 8 closest neighbors of a cell in a 2d grid when flattened to a 1d array",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/phugh/grid-neighbors-1d.git"
@@ -32,7 +40,10 @@
   },
   "homepage": "https://github.com/phugh/grid-neighbors-1d#readme",
   "devDependencies": {
-    "eslint": "^7.0.0",
-    "eslint-config-google": "^0.14.0"
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
+    "eslint": "^8.48.0",
+    "prettier": "^3.0.2",
+    "typescript": "^5.2.2"
   }
 }
