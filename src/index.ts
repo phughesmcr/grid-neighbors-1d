@@ -44,14 +44,14 @@ export const getNeighbors = (
   northWest: number,
 ] => {
   // Validate input
-  if (cell == null || isNaN(cell)) {
-    throw new SyntaxError("Expected cell to be a number.");
+  if (cell == null || isNaN(cell) || cell < 0) {
+    throw new SyntaxError("Expected cell to be a non-negative number.");
   }
-  if (width == null || isNaN(width)) {
-    throw new SyntaxError("Expected width to be a number.");
+  if (width == null || isNaN(width) || width < 0) {
+    throw new SyntaxError("Expected width to be a non-negative number.");
   }
-  if (height == null || isNaN(height)) {
-    throw new SyntaxError("Expected height to be a number.");
+  if (height == null || isNaN(height) || height < 0) {
+    throw new SyntaxError("Expected height to be a non-negative number.");
   }
 
   const CELL = Math.floor(cell);
